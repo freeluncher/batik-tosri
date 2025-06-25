@@ -1,0 +1,259 @@
+/* Import design tokens */
+@import '../tokens.css';
+
+/* About Section */
+.about {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Layer 1: Background Image */
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/batik-bakaran.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Layer 2: Gradient Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(45, 28, 11, 1) 49%, rgba(45, 28, 11, 0.5) 100%);
+  z-index: 2;
+}
+
+/* Layer 3: Content Container */
+.container {
+  position: relative;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  z-index: 3;
+}
+
+.content {
+  max-width: 600px;
+  color: var(--color-text-light);
+  position: relative;
+  padding: var(--space-8);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-2xl);
+  border: var(--border-1) solid rgba(192, 167, 122, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(192, 167, 122, 0.05) 0%, transparent 50%, rgba(192, 167, 122, 0.03) 100%);
+  border-radius: var(--radius-2xl);
+  pointer-events: none;
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  margin: 0 0 var(--space-6) 0;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(192, 167, 122, 0.3);
+  letter-spacing: var(--letter-spacing-tight);
+  position: relative;
+  z-index: 1;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-secondary-light));
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(192, 167, 122, 0.4);
+}
+
+.description {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  font-weight: var(--font-weight-regular);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+  letter-spacing: 0.3px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--space-6);
+  }
+  
+  .content {
+    max-width: 500px;
+    padding: var(--space-6);
+  }
+  
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .title::after {
+    width: 50px;
+    height: 2px;
+  }
+  
+  .description {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    height: 400px;
+  }
+  
+  .container {
+    background: linear-gradient(to top, rgba(45, 28, 11, 1) 50%, rgba(45, 28, 11, 0.5) 100%);
+    padding: 0 var(--space-4);
+    text-align: center;
+  }
+  
+  .content {
+    max-width: none;
+    padding: var(--space-6);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
+  }
+  
+  .title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-4);
+  }
+  
+  .title::after {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+  }
+  
+  .description {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    height: 350px;
+  }
+  
+  .container {
+    padding: 0 var(--space-3);
+  }
+  
+  .content {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+  
+  .title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-3);
+  }
+  
+  .title::after {
+    width: 30px;
+    height: 2px;
+  }
+  
+  .description {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* High resolution displays */
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 var(--space-12);
+  }
+  
+  .content {
+    max-width: 700px;
+    padding: var(--space-10);
+  }
+  
+  .title {
+    font-size: var(--font-size-5xl);
+  }
+  
+  .title::after {
+    width: 80px;
+    height: 4px;
+  }
+  
+  .description {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundImage {
+    background-attachment: scroll;
+  }
+}
+
+/* Print styles */
+@media print {
+  .about {
+    height: auto;
+    min-height: 300px;
+  }
+  
+  .backgroundImage {
+    display: none;
+  }
+  
+  .overlay {
+    background: var(--color-primary);
+  }
+  
+  .title,
+  .description {
+    color: white;
+    text-shadow: none;
+  }
+}
