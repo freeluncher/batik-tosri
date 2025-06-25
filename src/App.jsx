@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import FeaturedCollection from './components/FeaturedCollection'
+import PreOrder from './components/PreOrder'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <About />
       <FeaturedCollection />
+      <PreOrder />
     </>
   )
 }

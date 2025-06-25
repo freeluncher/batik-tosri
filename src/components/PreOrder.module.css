@@ -1,0 +1,617 @@
+/* Import design tokens */
+@import '../tokens.css';
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(192, 167, 122, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(192, 167, 122, 0.5);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes patternMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Pre-Order Section */
+.preOrder {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4a3728 0%, #3d2e1f 50%, #2d1e0f 100%);
+  display: flex;
+  align-items: center;
+  padding: var(--space-16) 0;
+  overflow: hidden;
+}
+
+.backgroundPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/batik-pattern-dark.png') repeat;
+  opacity: 0.1;
+  animation: patternMove 60s linear infinite;
+  z-index: 1;
+}
+
+.backgroundPattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(192, 167, 122, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(192, 167, 122, 0.05) 0%, transparent 50%);
+}
+
+.container {
+  position: relative;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  width: 100%;
+  z-index: 2;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Header */
+.header {
+  margin-bottom: var(--space-12);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s var(--ease-heritage);
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  margin: 0 0 var(--space-4) 0;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(192, 167, 122, 0.3);
+  letter-spacing: var(--letter-spacing-tight);
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-secondary-light));
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(192, 167, 122, 0.4);
+  transition: width 1s var(--ease-heritage) 0.5s;
+}
+
+.subtitle {
+  font-size: var(--font-size-xl);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: var(--font-weight-regular);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+/* Form Container */
+.formContainer {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-3xl);
+  padding: var(--space-12);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: var(--border-1) solid rgba(192, 167, 122, 0.2);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 1.2s var(--ease-heritage) 0.3s;
+}
+
+.formContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(192, 167, 122, 0.05) 0%, transparent 50%, rgba(192, 167, 122, 0.02) 100%);
+  border-radius: var(--radius-3xl);
+  pointer-events: none;
+}
+
+.formContainer:hover {
+  transform: translateY(-4px) scale(1);
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    0 6px 15px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.formTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin: 0 0 var(--space-8) 0;
+  text-align: center;
+  position: relative;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.input,
+.textarea {
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-2) solid rgba(45, 28, 11, 0.2);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.8);
+  transition: all var(--duration-300) var(--ease-heritage);
+  position: relative;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 0 0 3px rgba(192, 167, 122, 0.2),
+    0 4px 12px rgba(192, 167, 122, 0.1);
+  transform: translateY(-1px);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(45, 28, 11, 0.5);
+  font-style: italic;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Buttons */
+.sendEmailButton {
+  padding: var(--space-4) var(--space-8);
+  background: linear-gradient(to left, rgba(45, 28, 11, 1) 49%,rgba(45, 28, 11, 0.7111111111111111) 100%);
+  border: none;
+  border-radius: var(--radius-full);
+  color: white;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--duration-300) var(--ease-heritage);
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--space-2);
+}
+
+.sendEmailButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all var(--duration-300) var(--ease-heritage);
+}
+
+.sendEmailButton:hover {
+  background: #3a2a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(45, 28, 11, 0.3);
+}
+
+.sendEmailButton:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.sendEmailButton:active {
+  transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: var(--space-6) 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(45, 28, 11, 0.2);
+}
+
+.dividerText {
+  padding: 0 var(--space-4);
+  font-size: var(--font-size-sm);
+  color: rgba(45, 28, 11, 0.6);
+  font-weight: var(--font-weight-medium);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* WhatsApp Button */
+.whatsappButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-8);
+  background: linear-gradient(to left, rgba(7, 83, 84, 1) 8%,rgba(37, 211, 102, 0.7111111111111111) 76%);
+  border: none;
+  border-radius: var(--radius-full);
+  color: white;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--duration-300) var(--ease-heritage);
+  position: relative;
+  overflow: hidden;
+}
+
+.whatsappButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--duration-500) var(--ease-heritage);
+}
+
+.whatsappButton:hover {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.whatsappButton:hover::before {
+  left: 100%;
+}
+
+.whatsappIcon {
+  width: 24px;
+  height: 24px;
+  transition: transform var(--duration-300) var(--ease-heritage);
+}
+
+.whatsappButton:hover .whatsappIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Support Text */
+.supportText {
+  margin-top: var(--space-8);
+  font-size: var(--font-size-sm);
+  color: rgba(45, 28, 11, 0.7);
+  text-align: center;
+  line-height: var(--line-height-relaxed);
+  font-style: italic;
+  position: relative;
+}
+
+.supportText::before {
+  content: '✨';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-base);
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Visible states - triggered on scroll */
+.preOrder.visible .header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.preOrder.visible .title::after {
+  width: 120px;
+  animation: glowPulse 3s ease-in-out infinite 1s;
+}
+
+.preOrder.visible .formContainer {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Input animations on focus */
+.inputGroup {
+  position: relative;
+}
+
+.inputGroup::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  transition: width var(--duration-300) var(--ease-heritage);
+  border-radius: var(--radius-full);
+}
+
+.input:focus + .inputGroup::after,
+.textarea:focus + .inputGroup::after {
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--space-6);
+  }
+  
+  .formContainer {
+    padding: var(--space-10);
+    margin: 0 var(--space-4);
+  }
+  
+  .title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .subtitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .preOrder {
+    padding: var(--space-12) 0;
+  }
+  
+  .container {
+    padding: 0 var(--space-4);
+  }
+  
+  .header {
+    margin-bottom: var(--space-8);
+  }
+  
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .subtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  .formContainer {
+    padding: var(--space-8);
+    margin: 0;
+    border-radius: var(--radius-2xl);
+  }
+  
+  .formTitle {
+    font-size: var(--font-size-xl);
+  }
+  
+  .form {
+    gap: var(--space-5);
+  }
+  
+  .sendEmailButton,
+  .whatsappButton {
+    padding: var(--space-3) var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-3);
+  }
+  
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .formContainer {
+    padding: var(--space-6);
+  }
+  
+  .input,
+  .textarea {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+  }
+  
+  .sendEmailButton,
+  .whatsappButton {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+  
+  .whatsappIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* High resolution displays */
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 var(--space-12);
+  }
+  
+  .title {
+    font-size: var(--font-size-6xl);
+  }
+  
+  .subtitle {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .formContainer {
+    padding: var(--space-16);
+    max-width: 600px;
+  }
+  
+  .preOrder.visible .title::after {
+    width: 150px;
+    height: 5px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .formContainer,
+  .title::after,
+  .backgroundPattern,
+  .supportText::before,
+  .sendEmailButton::before,
+  .whatsappButton::before,
+  .whatsappIcon {
+    animation: none;
+    transition: none;
+  }
+  
+  .formContainer:hover,
+  .sendEmailButton:hover,
+  .whatsappButton:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .preOrder {
+    background: white;
+    color: black;
+  }
+  
+  .backgroundPattern {
+    display: none;
+  }
+  
+  .formContainer {
+    background: white;
+    box-shadow: none;
+    border: 2px solid black;
+  }
+  
+  .title,
+  .subtitle {
+    color: black;
+    text-shadow: none;
+  }
+  
+  .whatsappButton,
+  .sendEmailButton {
+    background: black;
+    color: white;
+  }
+}
