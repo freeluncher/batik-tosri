@@ -1,0 +1,571 @@
+/* Import design tokens */
+@import '../tokens.css';
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(192, 167, 122, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(192, 167, 122, 0.5);
+  }
+}
+
+/* Featured Collection Section */
+.featuredCollection {
+  position: relative;
+  width: 100%;
+  height: 720px;
+  background: linear-gradient(135deg, #faf8f3 0%, #f5f1e8 100%);
+  display: flex;
+  align-items: center;
+  padding: var(--space-16) 0;
+  overflow: hidden;
+}
+
+.featuredCollection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/batik-pattern-light.png') repeat;
+  opacity: 0.03;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  width: 100%;
+  z-index: 2;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-16);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s var(--ease-heritage);
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0;
+  position: relative;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.titleUnderline {
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  border-radius: var(--radius-full);
+  transition: width 1s var(--ease-heritage) 0.3s;
+}
+
+.moreButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  background: transparent;
+  border: var(--border-2) solid var(--color-primary);
+  border-radius: var(--radius-full);
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-300) var(--ease-heritage);
+  position: relative;
+  overflow: hidden;
+}
+
+.moreButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary);
+  transition: left var(--duration-300) var(--ease-heritage);
+  z-index: -1;
+}
+
+.moreButton:hover {
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(45, 28, 11, 0.2);
+}
+
+.moreButton:hover::before {
+  left: 0;
+}
+
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--duration-300) var(--ease-heritage);
+}
+
+.moreButton:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+/* Collections Grid */
+.collectionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.2s var(--ease-heritage) 0.2s;
+}
+
+.collectionCard {
+  position: relative;
+  background: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all var(--duration-500) var(--ease-heritage);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s var(--ease-heritage);
+  transition-delay: var(--delay);
+}
+
+.collectionCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.collectionImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-700) var(--ease-heritage);
+}
+
+.collectionCard:hover .collectionImage {
+  transform: scale(1.1);
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg, 
+    rgba(45, 28, 11, 0.8) 0%, 
+    rgba(45, 28, 11, 0.6) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--duration-400) var(--ease-heritage);
+}
+
+.collectionCard:hover .imageOverlay {
+  opacity: 1;
+}
+
+.overlayContent {
+  text-align: center;
+  color: white;
+  padding: var(--space-6);
+  transform: translateY(20px);
+  transition: transform var(--duration-400) var(--ease-heritage) 0.1s;
+}
+
+.collectionCard:hover .overlayContent {
+  transform: translateY(0);
+}
+
+.collectionName {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  margin: 0 0 var(--space-3) 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.collectionDescription {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-4) 0;
+  opacity: 0.9;
+}
+
+.viewButton {
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-secondary);
+  border: none;
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-300) var(--ease-heritage);
+  position: relative;
+  overflow: hidden;
+}
+
+.viewButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all var(--duration-300) var(--ease-heritage);
+}
+
+.viewButton:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.viewButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(192, 167, 122, 0.3);
+}
+
+.cardFooter {
+  padding: var(--space-6);
+  background: white;
+}
+
+.cardTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin: 0;
+  text-align: center;
+  position: relative;
+}
+
+.cardTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-300) var(--ease-heritage);
+}
+
+.collectionCard:hover .cardTitle::after {
+  width: 40px;
+}
+
+/* Shimmer effect */
+.collectionCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left var(--duration-700) var(--ease-heritage);
+  z-index: 1;
+  opacity: 0;
+}
+
+.collectionCard:hover::before {
+  left: 100%;
+  opacity: 1;
+}
+
+/* Visible states - triggered on scroll */
+.featuredCollection.visible .header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.featuredCollection.visible .titleUnderline {
+  width: 120px;
+}
+
+.featuredCollection.visible .collectionsGrid {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.featuredCollection.visible .collectionCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .featuredCollection {
+    height: auto;
+    min-height: 720px;
+    padding: var(--space-12) 0;
+  }
+  
+  .container {
+    padding: 0 var(--space-6);
+  }
+  
+  .header {
+    margin-bottom: var(--space-12);
+  }
+  
+  .title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .collectionsGrid {
+    gap: var(--space-6);
+  }
+  
+  .imageContainer {
+    height: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .featuredCollection {
+    padding: var(--space-8) 0;
+  }
+  
+  .container {
+    padding: 0 var(--space-4);
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: var(--space-6);
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+  
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .collectionsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  
+  .imageContainer {
+    height: 220px;
+  }
+  
+  .collectionCard {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .overlayContent {
+    padding: var(--space-4);
+  }
+  
+  .collectionName {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-3);
+  }
+  
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .moreButton {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+  
+  .imageContainer {
+    height: 200px;
+  }
+  
+  .cardFooter {
+    padding: var(--space-4);
+  }
+  
+  .cardTitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* High resolution displays */
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 var(--space-12);
+  }
+  
+  .title {
+    font-size: var(--font-size-6xl);
+  }
+  
+  .collectionsGrid {
+    gap: var(--space-10);
+  }
+  
+  .imageContainer {
+    height: 320px;
+  }
+  
+  .titleUnderline {
+    height: 5px;
+  }
+  
+  .featuredCollection.visible .titleUnderline {
+    width: 150px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .collectionCard,
+  .header,
+  .collectionsGrid,
+  .collectionImage,
+  .overlayContent,
+  .viewButton,
+  .arrowIcon {
+    animation: none;
+    transition: none;
+  }
+  
+  .collectionCard:hover {
+    transform: none;
+  }
+  
+  .collectionCard:hover .collectionImage {
+    transform: none;
+  }
+  
+  .moreButton:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .featuredCollection {
+    height: auto;
+    background: white;
+  }
+  
+  .imageOverlay {
+    display: none;
+  }
+  
+  .moreButton {
+    display: none;
+  }
+  
+  .title {
+    color: black;
+  }
+  
+  .cardTitle {
+    color: black;
+  }
+}
