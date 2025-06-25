@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import FeaturedCollection from './components/FeaturedCollection'
 import PreOrder from './components/PreOrder'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <About />
       <FeaturedCollection />
       <PreOrder />
+      <Footer />
     </>
   )
 }
