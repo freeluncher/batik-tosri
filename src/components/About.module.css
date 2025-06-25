@@ -1,6 +1,56 @@
 /* Import design tokens */
 @import '../tokens.css';
 
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes parallaxMove {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(192, 167, 122, 0.4);
+  }
+  50% {
+    box-shadow: 0 2px 12px rgba(192, 167, 122, 0.6);
+  }
+}
+
+@keyframes backgroundFloat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
 /* About Section */
 .about {
   position: relative;
@@ -23,6 +73,9 @@
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
+  transform: scale(1.1);
+  opacity: 0.7;
+  transition: all 1.2s var(--ease-heritage);
 }
 
 /* Layer 2: Gradient Overlay */
@@ -62,6 +115,16 @@
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 1s var(--ease-heritage);
+}
+
+.content:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .content::before {
@@ -88,6 +151,9 @@
   letter-spacing: var(--letter-spacing-tight);
   position: relative;
   z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s var(--ease-heritage) 0.2s;
 }
 
 .title::after {
@@ -95,11 +161,12 @@
   position: absolute;
   bottom: -8px;
   left: 0;
-  width: 60px;
+  width: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--color-secondary), var(--color-secondary-light));
   border-radius: var(--radius-full);
   box-shadow: 0 2px 8px rgba(192, 167, 122, 0.4);
+  transition: width 0.8s var(--ease-heritage) 0.5s;
 }
 
 .description {
@@ -113,6 +180,40 @@
   z-index: 1;
   font-style: italic;
   letter-spacing: 0.3px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s var(--ease-heritage) 0.4s;
+}
+
+/* Visible states - triggered on scroll */
+.about.visible .backgroundImage {
+  transform: scale(1);
+  opacity: 1;
+  animation: backgroundFloat 8s ease-in-out infinite 1.5s;
+}
+
+.about.visible .content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.about.visible .content:hover {
+  transform: translateY(-2px);
+}
+
+.about.visible .title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about.visible .title::after {
+  width: 60px;
+  animation: glowPulse 3s ease-in-out infinite 1s;
+}
+
+.about.visible .description {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive Design */
@@ -156,22 +257,38 @@
     padding: var(--space-6);
     background: rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-xl);
+    transform: translateY(50px);
+    transition: all 1s var(--ease-heritage);
   }
   
   .title {
     font-size: var(--font-size-2xl);
     margin-bottom: var(--space-4);
+    transition: all 0.8s var(--ease-heritage) 0.3s;
   }
   
   .title::after {
     left: 50%;
     transform: translateX(-50%);
-    width: 40px;
+    transition: width 0.8s var(--ease-heritage) 0.6s;
   }
   
   .description {
     font-size: var(--font-size-base);
     line-height: var(--line-height-normal);
+    transition: all 1s var(--ease-heritage) 0.5s;
+  }
+  
+  .about.visible .backgroundImage {
+    animation: backgroundFloat 10s ease-in-out infinite 1.5s;
+  }
+  
+  .about.visible .content {
+    transform: translateY(0);
+  }
+  
+  .about.visible .title::after {
+    width: 40px;
   }
 }
 
@@ -231,8 +348,23 @@
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
+  .backgroundImage,
+  .content,
+  .title,
+  .description {
+    animation: none;
+  }
+  
   .backgroundImage {
     background-attachment: scroll;
+  }
+  
+  .content:hover {
+    transform: none;
+  }
+  
+  .title::after {
+    animation: none;
   }
 }
 
